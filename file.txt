@@ -1,3 +1,17 @@
 Initial content
 Content for dev branch
 Feature content for us12
+----
+Finding xpath for:
+- input username & password
+//div/input[@id = 'username']
+
+- button submit
+//div//input[@name = 'password']
+
+- error msg when login failed
+//div[@id = 'error']
+
+- button logout
+//div[@id = 'site-title']/a
+//div/a[@class = 'custom-logo-link']
