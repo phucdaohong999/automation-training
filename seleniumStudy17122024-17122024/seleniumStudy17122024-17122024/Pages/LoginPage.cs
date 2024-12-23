@@ -1,4 +1,6 @@
 ﻿using System;
+using Automation.Core.Helpers;
+using Automation.WebDriver;
 using OpenQA.Selenium;
 
 namespace seleniumStudy17122024_17122024.Pages
@@ -10,13 +12,13 @@ namespace seleniumStudy17122024_17122024.Pages
         }
 
         //Type username student into Username field
-        private IWebElement inputUsername => driver.FindElement(By.XPath("//input[@name = 'username']"));
+        private IWebElement inputUsername => driver.FindElementByXpath("//input[@name = 'username']");
 
         //Type password Password123 into Password field
-        private IWebElement inputPassword => driver.FindElement(By.XPath("//input[@name = 'password']"));
+        private IWebElement inputPassword => driver.FindElementByXpath("//input[@name = 'password']");
 
         //Push Submit button
-        private IWebElement buttonLogin => driver.FindElement(By.XPath("//button[contains(., 'Login')]"));
+        private IWebElement buttonLogin => driver.FindElementByXpath("//button[contains(., 'Login')]");
 
         //Method interact
         public void EnterUsername(string username)
@@ -42,7 +44,7 @@ namespace seleniumStudy17122024_17122024.Pages
 
         public void GoToLogin()
         {
-            driver.Navigate().GoToUrl("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+            driver.Go(ConfigurationHelper.GetValue<string>("url"));
         }
     }
 }

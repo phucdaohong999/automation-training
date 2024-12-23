@@ -1,10 +1,4 @@
-﻿using System;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System.Collections;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
-using WebDriverManager.DriverConfigs.Impl;
+﻿using OpenQA.Selenium;
 
 namespace seleniumStudy17122024_17122024.Pages
 {
@@ -21,7 +15,7 @@ namespace seleniumStudy17122024_17122024.Pages
         private IWebElement employeeNameInput => driver.FindElement(By.XPath("//label[text()='Employee Name']//parent::div//following-sibling::div//input"));
 
         private IWebElement dropdown(string dropDownLabel) => driver.FindElement(By.XPath($"//label[text()='{dropDownLabel}']//..//following-sibling::div"));
-        private IWebElement nonBlankOptionOfLeaveTypeDropdown(string option, string dropDownLabel) => driver.FindElement(By.XPath($"//label[text()='{dropDownLabel}']//..//following-sibling::div//span[text()='{option}']"));
+        private IWebElement nonBlankOptionOfDropdown(string option, string dropDownLabel) => driver.FindElement(By.XPath($"//label[text()='{dropDownLabel}']//..//following-sibling::div//span[text()='{option}']"));
         private IWebElement blankOptionDropdown(string dropDownLabel) => driver.FindElement(By.XPath($"//label[text()='{dropDownLabel}']//..//following-sibling::div//div[text() = '-- Select --']"));
 
         private IWebElement entitlementInput => driver.FindElement(By.XPath("//label[text()='Entitlement']/../following-sibling::div//input"));
@@ -51,8 +45,8 @@ namespace seleniumStudy17122024_17122024.Pages
 
         public void SelectDropdown(string dropDownLabel)
         {
-            Thread.Sleep(1000);
             dropdown(dropDownLabel).Click();
+            Thread.Sleep(1000);
         }
 
         public void SelectBlankOptionOfDropdown(string dropDownLabel)
@@ -62,10 +56,10 @@ namespace seleniumStudy17122024_17122024.Pages
 
         public void SelectNonBlankOptionOfDropdown(string option, string dropDownLabel)
         {
-            nonBlankOptionOfLeaveTypeDropdown(option,dropDownLabel).Click();
+            nonBlankOptionOfDropdown(option,dropDownLabel).Click();
         }
 
-        public void EnterEntitlementInput(string entitlement)
+        public void EnterEntitlement(string entitlement)
         {
             entitlementInput.SendKeys(entitlement);
         }

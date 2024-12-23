@@ -1,4 +1,4 @@
-﻿using OpenQA.Selenium;
+﻿using Automation.Core.Helpers;
 using seleniumStudy17122024_17122024.Pages;
 
 namespace seleniumStudy17122024_17122024.Test
@@ -9,20 +9,31 @@ namespace seleniumStudy17122024_17122024.Test
         private LoginPage loginPage;
         private AddEntitlementsPage addEntitlementPage;
 
-        public InvalidInputValueTest()
+        public override void SetUpPageObjects()
         {
             loginPage = new LoginPage(driver);
             addEntitlementPage = new AddEntitlementsPage(driver);
         }
 
+        //public InvalidInputValueTest()
+        //{
+        //    loginPage = new LoginPage(driver);
+        //    addEntitlementPage = new AddEntitlementsPage(driver);
+        //}
+
         [TestMethod]
         public void VerifyErrorMessage()
         {
+            //loginPage = new LoginPage(driver);
+            //addEntitlementPage = new AddEntitlementsPage(driver);
+
             //Go to login page
             loginPage.GoToLogin();
 
             //Type username and password
-            loginPage.EnterUsernameAndPassword("Admin", "admin123");
+            string username = ConfigurationHelper.GetValue<string>("username");
+            string password = ConfigurationHelper.GetValue<string>("password");
+            loginPage.EnterUsernameAndPassword(username, password);
 
             //Push Submit button
             loginPage.ClickSubmitButton();
@@ -42,7 +53,7 @@ namespace seleniumStudy17122024_17122024.Test
             addEntitlementPage.SelectDropdown("Leave Type");
 
             //Select CAS Option Of Leave type Dropdown
-            addEntitlementPage.SelectNonBlankOptionOfDropdown("CAS", "Leave Type");
+            addEntitlementPage.SelectNonBlankOptionOfDropdown("US - Matternity", "Leave Type");
 
             ////Open Leave type Dropdown
             addEntitlementPage.SelectDropdown("Leave Type");
