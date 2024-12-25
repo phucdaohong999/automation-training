@@ -1,4 +1,6 @@
 ﻿using Automation.Core.Helpers;
+using Newtonsoft.Json;
+using OpenQA.Selenium.BiDi.Modules.Log;
 using seleniumStudy17122024_17122024.Pages;
 
 namespace seleniumStudy17122024_17122024.Test
@@ -15,20 +17,12 @@ namespace seleniumStudy17122024_17122024.Test
             addEntitlementPage = new AddEntitlementsPage(driver);
         }
 
-        //public InvalidInputValueTest()
-        //{
-        //    loginPage = new LoginPage(driver);
-        //    addEntitlementPage = new AddEntitlementsPage(driver);
-        //}
-
         [TestMethod]
         public void VerifyErrorMessage()
         {
-            //loginPage = new LoginPage(driver);
-            //addEntitlementPage = new AddEntitlementsPage(driver);
-
             //Go to login page
-            loginPage.GoToLogin();
+            string url = ConfigurationHelper.GetValue<string>("url");
+            loginPage.GoToLogin(url);
 
             //Type username and password
             string username = ConfigurationHelper.GetValue<string>("username");
@@ -36,7 +30,7 @@ namespace seleniumStudy17122024_17122024.Test
             loginPage.EnterUsernameAndPassword(username, password);
 
             //Push Submit button
-            loginPage.ClickSubmitButton();
+            loginPage.ClickLoginButton();
 
 
             //Navigate to Add Entitlements page
@@ -48,40 +42,48 @@ namespace seleniumStudy17122024_17122024.Test
             //Enter Employee name
             addEntitlementPage.EnterEmployeeName("bard");
 
-
-            ////Open Leave type Dropdown
-            addEntitlementPage.SelectDropdown("Leave Type");
+            //Open Leave type Dropdown
+            string leaveTypeLabel = "Leave Type";
+            addEntitlementPage.SelectDropdown(leaveTypeLabel);
 
             //Select CAS Option Of Leave type Dropdown
-            addEntitlementPage.SelectNonBlankOptionOfDropdown("US - Matternity", "Leave Type");
+            string dropdownOption = "US - Matternity";
+            addEntitlementPage.SelectNonBlankOptionOfDropdown(dropdownOption, leaveTypeLabel);
 
-            ////Open Leave type Dropdown
-            addEntitlementPage.SelectDropdown("Leave Type");
+            //Open Leave type Dropdown
+            addEntitlementPage.SelectDropdown(leaveTypeLabel);
             //Select Blank Option Of Leave type Dropdown
-            addEntitlementPage.SelectBlankOptionOfDropdown("Leave Type");
+            addEntitlementPage.SelectBlankOptionOfDropdown(leaveTypeLabel);
 
 
-
-            ////Open Leave Period Dropdown
-            addEntitlementPage.SelectDropdown("Leave Period");
+            //Open Leave Period Dropdown
+            string leavePeriodLabel = "Leave Period";
+            addEntitlementPage.SelectDropdown(leavePeriodLabel);
 
             //Select Blank Option Of Leave Period Dropdown
-            addEntitlementPage.SelectBlankOptionOfDropdown("Leave Period");
+            addEntitlementPage.SelectBlankOptionOfDropdown(leavePeriodLabel);
 
 
             //Enter Entitlement
             addEntitlementPage.EnterEntitlement("aa");
 
             //Verify error messages are showing
-            string employeeNameError = addEntitlementPage.GetErrorText("Employee Name");
-            string leaveTypeError = addEntitlementPage.GetErrorText("Leave Type");
-            string leavePeriodError = addEntitlementPage.GetErrorText("Leave Period");
-            string entitlementError = addEntitlementPage.GetErrorText("Entitlement");
+            string employeeNameLabel = "Employee Name";
+            string entitlementLabel = "Entitlement";
+            string invalidErrorMessage = "Invalid";
+            string requiredErrorMessage = "Required";
+            string entitlementErrorMessage = "Should be a number with upto 2 decimal places";
 
-            Assert.AreEqual(employeeNameError, "Invalid");
-            Assert.AreEqual(leaveTypeError, "Required");
-            Assert.AreEqual(leavePeriodError, "Required");
-            Assert.AreEqual(entitlementError, "Should be a number with upto 2 decimal places");
+
+            string employeeNameError = addEntitlementPage.GetErrorText(employeeNameLabel);
+            string leaveTypeError = addEntitlementPage.GetErrorText(leaveTypeLabel);
+            string leavePeriodError = addEntitlementPage.GetErrorText(leavePeriodLabel);
+            string entitlementError = addEntitlementPage.GetErrorText(entitlementLabel);
+
+            Assert.AreEqual(employeeNameError, invalidErrorMessage);
+            Assert.AreEqual(leaveTypeError, requiredErrorMessage);
+            Assert.AreEqual(leavePeriodError, requiredErrorMessage);
+            Assert.AreEqual(entitlementError, entitlementErrorMessage);
         }
     }
 }

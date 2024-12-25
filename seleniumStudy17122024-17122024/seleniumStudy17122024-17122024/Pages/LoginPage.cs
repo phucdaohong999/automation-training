@@ -1,6 +1,4 @@
-﻿using System;
-using Automation.Core.Helpers;
-using Automation.WebDriver;
+﻿using Automation.WebDriver;
 using OpenQA.Selenium;
 
 namespace seleniumStudy17122024_17122024.Pages
@@ -11,16 +9,27 @@ namespace seleniumStudy17122024_17122024.Pages
         {
         }
 
-        //Type username student into Username field
+        //Elements
         private IWebElement inputUsername => driver.FindElementByXpath("//input[@name = 'username']");
-
-        //Type password Password123 into Password field
         private IWebElement inputPassword => driver.FindElementByXpath("//input[@name = 'password']");
-
-        //Push Submit button
-        private IWebElement buttonLogin => driver.FindElementByXpath("//button[contains(., 'Login')]");
+        private IWebElement btnLogin => driver.FindElementByXpath("//button[contains(., 'Login')]");
+        private IWebElement btnSubmit => driver.FindElementByXpath("//button[@id = 'submit']");
+        private IWebElement errorMessage => driver.FindElementByXpath("//div[@id = 'error']");
+        private IList<IWebElement> radioButtonList => driver.FindElementsByXpath("//input[@type = 'radio']");
+        private IWebElement radioButton => driver.FindElementByXpath("//input[@value = 'user']");
 
         //Method interact
+        [Obsolete]
+        public string GetRadioButton()
+        {
+            return radioButton.GetAttribute("value");
+        }
+
+        public IList<IWebElement> GetRadioButtonList()
+        {
+            return radioButtonList;
+        }
+
         public void EnterUsername(string username)
         {
             inputUsername.SendKeys(username);
@@ -31,9 +40,14 @@ namespace seleniumStudy17122024_17122024.Pages
             inputPassword.SendKeys(password);
         }
 
+        public void ClickLoginButton()
+        {
+            btnLogin.Click();
+        }
+
         public void ClickSubmitButton()
         {
-            buttonLogin.Click();
+            btnSubmit.Click();
         }
 
         public void EnterUsernameAndPassword(string username, string password)
@@ -42,9 +56,19 @@ namespace seleniumStudy17122024_17122024.Pages
             EnterPassword(password);
         }
 
-        public void GoToLogin()
+        public void GoToLogin(string url)
         {
-            driver.Go(ConfigurationHelper.GetValue<string>("url"));
+            driver.Go(url);
+        }
+
+        public bool VerifyErrorMessageExist()
+        {
+            return errorMessage.Displayed;
+        }
+
+        public bool VerifyCorrectErrorMessage(string inputErrorMessage)
+        {
+            return errorMessage.Text == inputErrorMessage;
         }
     }
 }

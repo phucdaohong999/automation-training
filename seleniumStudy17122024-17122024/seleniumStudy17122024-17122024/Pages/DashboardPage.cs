@@ -1,7 +1,5 @@
-﻿using System;
-using FluentAssert;
+﻿using Automation.WebDriver;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace seleniumStudy17122024_17122024.Pages
 {
@@ -12,7 +10,7 @@ namespace seleniumStudy17122024_17122024.Pages
         }
 
         //Web Element
-        private IWebElement chartTimeAtWork => driver.FindElement(By.XPath("//div[@class='emp-attendance-chart']"));
+        private IWebElement chartTimeAtWork => driver.FindElementByXpath("//div[@class='emp-attendance-chart']");
 
         //Method
         public bool VerifyChartTimeExist()

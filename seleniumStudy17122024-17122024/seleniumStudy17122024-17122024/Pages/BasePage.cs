@@ -1,5 +1,4 @@
-﻿using System;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace seleniumStudy17122024_17122024.Pages
 {

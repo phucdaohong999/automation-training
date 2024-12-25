@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Automation.WebDriver;
+using OpenQA.Selenium;
 
 namespace seleniumStudy17122024_17122024.Pages
 {
@@ -8,21 +9,21 @@ namespace seleniumStudy17122024_17122024.Pages
         {
         }
 
-        // Page elements
-        private IWebElement btnLeave => driver.FindElement(By.XPath("//a[@class='oxd-main-menu-item']//span[text() = 'Leave']"));
-        private IWebElement btnEntitlements => driver.FindElement(By.XPath("//li//span[contains(text(),'Entitlements')]"));
-        private IWebElement btnAddEntitlements => driver.FindElement(By.XPath("//a[text()='Add Entitlements']"));
-        private IWebElement employeeNameInput => driver.FindElement(By.XPath("//label[text()='Employee Name']//parent::div//following-sibling::div//input"));
+        // Webpage elements
+        private IWebElement btnLeave => driver.FindElementByXpath("//a[@class='oxd-main-menu-item']//span[text() = 'Leave']");
+        private IWebElement btnEntitlements => driver.FindElementByXpath("//li//span[contains(text(),'Entitlements')]");
+        private IWebElement btnAddEntitlements => driver.FindElementByXpath("//a[text()='Add Entitlements']");
+        private IWebElement employeeNameInput => driver.FindElementByXpath("//label[text()='Employee Name']//parent::div//following-sibling::div//input");
 
-        private IWebElement dropdown(string dropDownLabel) => driver.FindElement(By.XPath($"//label[text()='{dropDownLabel}']//..//following-sibling::div"));
-        private IWebElement nonBlankOptionOfDropdown(string option, string dropDownLabel) => driver.FindElement(By.XPath($"//label[text()='{dropDownLabel}']//..//following-sibling::div//span[text()='{option}']"));
-        private IWebElement blankOptionDropdown(string dropDownLabel) => driver.FindElement(By.XPath($"//label[text()='{dropDownLabel}']//..//following-sibling::div//div[text() = '-- Select --']"));
+        private IWebElement dropdown(string dropDownLabel) => driver.FindElementByXpath($"//label[text()='{dropDownLabel}']//..//following-sibling::div");
+        private IWebElement nonBlankOptionOfDropdown(string option, string dropDownLabel) => driver.FindElementByXpath($"//label[text()='{dropDownLabel}']//..//following-sibling::div//span[text()='{option}']");
+        private IWebElement blankOptionDropdown(string dropDownLabel) => driver.FindElementByXpath($"//label[text()='{dropDownLabel}']//..//following-sibling::div//div[text() = '-- Select --']");
 
-        private IWebElement entitlementInput => driver.FindElement(By.XPath("//label[text()='Entitlement']/../following-sibling::div//input"));
-        private IWebElement error(string name) => driver.FindElement(By.XPath($"//label[text() ='{name}']//..//following-sibling::div//following-sibling::span"));
+        private IWebElement entitlementInput => driver.FindElementByXpath("//label[text()='Entitlement']/../following-sibling::div//input");
+        private IWebElement error(string name) => driver.FindElementByXpath($"//label[text() ='{name}']//..//following-sibling::div//following-sibling::span");
 
 
-        // Methods interacting with page elements
+        // Methods
         public void ClickBtnLeave()
         {
             btnLeave.Click();

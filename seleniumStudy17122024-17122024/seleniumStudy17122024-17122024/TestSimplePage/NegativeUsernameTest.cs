@@ -1,62 +1,41 @@
-﻿using System;
-using FluentAssert;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
+﻿using FluentAssert;
+using seleniumStudy17122024_17122024.Pages;
 
 namespace seleniumStudy17122024_17122024.Test
 {
     [TestClass]
-    public class NegativeUsernameTest
+    public class NegativeUsernameTest : BaseTest
     {
-        private IWebDriver driver;
+        private LoginPage loginPage;
 
-        [TestInitialize]
-        public void SetupAndOpenBrowser()
+        public override void SetUpPageObjects()
         {
-            driver = new ChromeDriver();
+            loginPage = new LoginPage(driver);
         }
 
-        //        Test case 2: Negative username test
+        // Test case 2: Negative username test
         [TestMethod]
-        public void Verify_Negative_Username_Test()
+        public void Verify_Negative_Username()
         {
-            //        Open page
-            driver.Navigate().GoToUrl("https://practicetestautomation.com/practice-test-login/");
+            //Open page
+            string url = "https://practicetestautomation.com/practice-test-login/";
+            loginPage.GoToLogin(url);
 
-            //        Type username incorrectUser into Username field
-            driver.FindElement(By.XPath("//input[@id = 'username']")).SendKeys("incorrectUser");
+            //Type username incorrectUser into Username field with correct password
+            string username = "incorrectUser";
+            string password = "Password123";
+            loginPage.EnterUsernameAndPassword(username, password);
 
-            //        Type password Password123 into Password field
-            driver.FindElement(By.XPath("//input[@id = 'password']")).SendKeys("Password123");
+            //Push Submit button
+            loginPage.ClickSubmitButton();
 
-            ////        Push Submit button
-            driver.FindElement(By.XPath("//button[@id = 'submit']")).Click();
-
-            //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            //IWebElement element = wait.Until(driver => driver.FindElement(By.XPath("div[@id = 'error']")));
-
-            ////Verify error message is displayed
-            bool isErrorMessageDisplay = driver.FindElement(By.XPath("//div[@id = 'error']")).Displayed;
+            //Verify error message is displayed
+            bool isErrorMessageDisplay = loginPage.VerifyErrorMessageExist();
             isErrorMessageDisplay.ShouldBeTrue();
 
-            ////Verify error message text is Your username is invalid!
-            string errorMessage = driver.FindElement(By.XPath("//div[@id = 'error']")).Text;
-            errorMessage.ShouldBeEqualTo("Your username is invalid!");
-
-            //int firstValue = 500;
-            //int secondValue = 600;
-            //int largerValue;
-
-            //largerValue = System.Math.Max(firstValue, secondValue);
-            //Console.WriteLine(largerValue);
-        }
-
-
-        [TestCleanup]
-        public void BrowserCleanup()
-        {
-            driver.Quit();
+            //Verify error message text is Your username is invalid!
+            bool isCorrectErrorMessage = loginPage.VerifyCorrectErrorMessage("Your username is invalid!");
+            isCorrectErrorMessage.ShouldBeTrue();
         }
     }
 }
