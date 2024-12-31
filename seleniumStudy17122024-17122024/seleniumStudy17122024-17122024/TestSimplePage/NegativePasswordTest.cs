@@ -13,27 +13,27 @@ namespace seleniumStudy17122024_17122024.Test
             loginPage = new LoginPage(driver);
         }
 
-        // Test case 3: Negative password test
+        // Test case 3: Test login with wrong password
         [TestMethod]
         public void Verify_Negative_Password()
         {
-            //Open page
+            // Step 1: Open page
             string url = "https://practicetestautomation.com/practice-test-login/";
             loginPage.GoToLogin(url);
 
-            //Enter correct username and incorrect password
+            // Step 2: Enter correct username and incorrect password
             string username = "student";
             string password = "Password" + new Random().Next(1000, 9999 + 1);
             loginPage.EnterUsernameAndPassword(username, password);
 
-            //Push Submit button
+            // Step 3: Push Submit button
             loginPage.ClickSubmitButton();
 
-            //Verify error message is displayed
+            // Step 4: Verify error message is displayed
             bool isErrorMessageDisplay = loginPage.VerifyErrorMessageExist();
             isErrorMessageDisplay.ShouldBeTrue();
 
-            //Verify error message text is Your password is invalid!
+            // Step 5: Verify error message text is Your password is invalid!
             bool isCorrectErrorMessage = loginPage.VerifyCorrectErrorMessage("Your password is invalid!");
             isCorrectErrorMessage.ShouldBeTrue();
         }

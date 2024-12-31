@@ -19,7 +19,7 @@ namespace seleniumStudy17122024_17122024.SeleniumLearning1812202418122024
         public void TestClickRadioButton()
 		{
 			//Go to page
-			string url = "https://rahulshettyacademy.com/loginpagePractise/"
+			string url = "https://rahulshettyacademy.com/loginpagePractise/";
             loginPage.GoToLogin(url);
 
 			//Get list of radio button

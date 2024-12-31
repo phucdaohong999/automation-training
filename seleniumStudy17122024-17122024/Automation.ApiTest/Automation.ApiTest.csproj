@@ -15,16 +15,26 @@
     <PackageReference Include="coverlet.collector" Version="6.0.2"><IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 <PrivateAssets>all</PrivateAssets>
 </PackageReference>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.0" />
+    <PackageReference Include="FluentAssertions" Version="7.0.0" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
     <PackageReference Include="RazorEngine" Version="3.10.0" />
     <PackageReference Include="System.Reactive" Version="6.0.1" />
-    <PackageReference Include="ExtentReports" Version="5.0.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Helpers\" />
+    <None Remove="Model\" />
+    <None Remove="Test\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
+    <Folder Include="Model\" />
+    <Folder Include="Test\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="testhost.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Automation.Core\Automation.Core.csproj" />
   </ItemGroup>
 </Project>
