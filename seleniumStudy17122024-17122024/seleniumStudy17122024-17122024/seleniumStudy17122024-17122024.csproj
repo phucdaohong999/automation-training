@@ -34,12 +34,19 @@
     <None Remove="SeleniumLearning - 18122024 - 18122024\" />
     <None Remove="Pages\" />
     <None Remove="TestSimplePage\" />
+    <None Remove="Services\" />
+    <None Remove="SqlQueries\" />
+    <None Remove="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Test\" />
     <Folder Include="SeleniumLearning - 18122024 - 18122024\" />
     <Folder Include="Pages\" />
     <Folder Include="TestSimplePage\" />
+    <Folder Include="Services\" />
+    <Folder Include="SqlQueries\" />
+    <Folder Include="SqlQueries\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <None Update="testhost.dll.config">

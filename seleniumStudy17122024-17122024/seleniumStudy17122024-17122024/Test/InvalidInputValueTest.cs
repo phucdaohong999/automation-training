@@ -45,11 +45,11 @@ namespace seleniumStudy17122024_17122024.Test
             addEntitlementPage.EnterEmployeeName("bard");
 
             // Step 6: Open Leave type Dropdown
-            string leaveTypeLabel = "Leave Type";
+            string leaveTypeLabel = JsonHelper.GetJsonValue<string>("leaveTypeLabel");
             addEntitlementPage.SelectDropdown(leaveTypeLabel);
 
             // Step 7: Select CAS Option Of Leave type Dropdown
-            string dropdownOption = "US - Matternity";
+            string dropdownOption = JsonHelper.GetJsonValue<string>("dropdownUSMatternityOption");
             addEntitlementPage.SelectNonBlankOptionOfDropdown(dropdownOption, leaveTypeLabel);
 
             // Step 8: Open Leave type Dropdown
@@ -59,7 +59,7 @@ namespace seleniumStudy17122024_17122024.Test
             addEntitlementPage.SelectBlankOptionOfDropdown(leaveTypeLabel);
 
             // Step 10: Open Leave Period Dropdown
-            string leavePeriodLabel = "Leave Period";
+            string leavePeriodLabel = JsonHelper.GetJsonValue<string>("leavePeriodLabel");
             addEntitlementPage.SelectDropdown(leavePeriodLabel);
 
             // Step 11: Select Blank Option Of Leave Period Dropdown
@@ -70,11 +70,11 @@ namespace seleniumStudy17122024_17122024.Test
 
             // Step 13: Verify error messages are showing
 
-            string employeeNameLabel = ConfigurationHelper.GetJsonValue<string>("employeeNameLabel");
-            string entitlementLabel = ConfigurationHelper.GetJsonValue<string>("entitlementLabel");
-            string invalidErrorMessage = ConfigurationHelper.GetJsonValue<string>("invalidErrorMessage");
-            string requiredErrorMessage = ConfigurationHelper.GetJsonValue<string>("requiredErrorMessage");
-            string entitlementErrorMessage = ConfigurationHelper.GetJsonValue<string>("entitlementErrorMessage");
+            string employeeNameLabel = JsonHelper.GetJsonValue<string>("employeeNameLabel");
+            string entitlementLabel = JsonHelper.GetJsonValue<string>("entitlementLabel");
+            string invalidErrorMessage = JsonHelper.GetJsonValue<string>("invalidErrorMessage");
+            string requiredErrorMessage = JsonHelper.GetJsonValue<string>("requiredErrorMessage");
+            string entitlementErrorMessage = JsonHelper.GetJsonValue<string>("entitlementErrorMessage");
 
             string employeeNameError = addEntitlementPage.GetErrorText(employeeNameLabel);
             string leaveTypeError = addEntitlementPage.GetErrorText(leaveTypeLabel);

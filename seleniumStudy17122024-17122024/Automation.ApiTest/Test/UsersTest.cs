@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using Automation.ApiTest.Model;
+using Automation.Core.Helpers;
 using FluentAssertions;
 using Newtonsoft.Json;
 using RestSharp;
@@ -18,7 +19,7 @@ namespace Automation.ApiTest.Test
             var randomPage = new Random().Next(1, 3);
 
             // Step 2: Send a GET request to the users API for the random page.
-            var request = new RestRequest($"/api/users?page={randomPage}", Method.Get);
+            var request = ApiHelper.GetUsers(randomPage);
             RestResponse response = client.Execute(request);
 
             // Step 3: Validate the response status and content.
@@ -44,9 +45,7 @@ namespace Automation.ApiTest.Test
             };
 
             // Step 2: Create a POST request to the users API with the request body.
-            var request = new RestRequest($"/api/users", Method.Post);
-            request.AddHeader("Content-Type", "application/json");
-            request.AddJsonBody(requestBody);
+            var request = ApiHelper.CreateUser(requestBody);
 
             // Step 3: Execute the request and capture the response.
             RestResponse response = client.Execute(request);
