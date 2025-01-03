@@ -8,7 +8,7 @@ pool:
   demands: agent.name -equals desktopAgent2
 variables:
   buildConfiguration: 'Debug'  # Set build configuration
-  solution: '$(Build.SourcesDirectory)\trainingRepository1\lesson4SeleniumStudy17122024-17122024.sln'  # Solution file location
+  solution: 'lesson4SeleniumStudy17122024-17122024.sln'  # Solution file location
  
 steps:
 # Use the latest .NET SDK
